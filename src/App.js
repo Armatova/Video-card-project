@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Add from "./Components/Add/Add";
+import Details from "./Components/Details/Details";
+import Edit from "./Components/Edit/Edit";
+import Header from "./Components/Header/Header";
+import VideosList from "./Components/VideosList/VideosList";
+import VideosContextProvider from "./Contexts/videosContext";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <VideosContextProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<VideosList />} />
+          <Route path="/add" element={<Add />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="/details/:id" element={<Details />} />
+        </Routes>
+        <h1>Footer</h1>
+      </BrowserRouter>
+    </VideosContextProvider>
   );
-}
+};
 
 export default App;
